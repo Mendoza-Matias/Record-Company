@@ -30,7 +30,4 @@ public class User {
     @Column(name = "rol")
     private String rol;
 
-    @OneToMany(mappedBy = "user" , fetch = FetchType.LAZY)
-    private List <PrePurchase> purchasedAlbum;
-
 }

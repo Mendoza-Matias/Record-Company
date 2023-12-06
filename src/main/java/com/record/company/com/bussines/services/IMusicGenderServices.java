@@ -1,23 +1,23 @@
 package com.record.company.com.bussines.services;
 
-import com.record.company.com.domain.dto.musicGenders.MusicGendersAlbumDto;
-import com.record.company.com.domain.dto.musicGenders.CreateMusicGendersDto;
-import com.record.company.com.domain.dto.musicGenders.MusicGendersDto;
+import com.record.company.com.domain.dto.musicGenders.MusicGenderAlbumDto;
+import com.record.company.com.domain.dto.musicGenders.CreateMusicGenderDto;
+import com.record.company.com.domain.dto.musicGenders.MusicGenderDto;
 
 import java.util.List;
 
 public interface IMusicGenderServices {
 
-    List<MusicGendersDto> getAllMusicGenders ();
+    List<MusicGenderDto> getAllMusicGender ();
 
-    MusicGendersDto getMusicGendersById (int id);
+    MusicGenderDto getMusicGenderById (int id);
 
-    MusicGendersDto createMusicGenders (CreateMusicGendersDto musicGender);
+    MusicGenderDto createMusicGender (int idAlbum, CreateMusicGenderDto musicGender);
 
-    MusicGendersDto updateMusicGenders (CreateMusicGendersDto musicGender);
+    MusicGenderDto updateMusicGender (int id, int idAlbum, CreateMusicGenderDto musicGender);
 
-    MusicGendersDto deleteMusicGenders (int id);
+    MusicGenderDto deleteMusicGender (int id);
 
-     MusicGendersAlbumDto getAllAlbumByMusicGender(String musicGender);
+     MusicGenderAlbumDto getAllAlbumByMusicGender(String musicGender);
 
 }

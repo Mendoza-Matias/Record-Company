@@ -12,9 +12,9 @@ public interface IArtistServices {
 
     ArtistDto getArtistById (int id);
 
-    ArtistDto createArtist(CreateArtistDto artist);
+    ArtistDto createArtist(int idAlbum , CreateArtistDto artist);
 
-    ArtistDto updateArtist(CreateArtistDto artist);
+    ArtistDto updateArtist(int id , int idAlbum , CreateArtistDto artist);
 
     ArtistDto deleteArtist(int id);
 

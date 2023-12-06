@@ -1,23 +1,18 @@
 package com.record.company.com.bussines.services;
 
-import com.record.company.com.domain.dto.user.CreateUserDto;
-import com.record.company.com.domain.dto.user.PrePurchaseUserDto;
-import com.record.company.com.domain.dto.user.UpdateUserDto;
-import com.record.company.com.domain.dto.user.UserDto;
+import com.record.company.com.domain.dto.user.*;
+
+import java.util.List;
 
 public interface IUserServices {
 
-    UserDto getAllUser();
-
-    UserDto getUserById();
-
-    UserDto createUser(CreateUserDto createUserDto);
-
-    UserDto updateUser(int id , UpdateUserDto updateUserDto);
-
+    List <UserDto> getAllUser();
+    UserDto getUserById(int id);
+    List <UserPurchaseDto> getPurchaseByUserId (int id);
+    UserDto createUser(CreateUserDto user);
+    UserDto updateUser(int id , UpdateUserDto user);
     UserDto deleteUser(int id);
 
-    PrePurchaseUserDto getPrePurchaseByUser (UserDto userDto);
 
 
 

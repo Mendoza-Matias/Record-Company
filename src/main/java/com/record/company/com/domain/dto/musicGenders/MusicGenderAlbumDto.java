@@ -1,6 +1,6 @@
-package com.record.company.com.domain.dto.user;
+package com.record.company.com.domain.dto.musicGenders;
 
-import com.record.company.com.domain.entity.Purchase;
+import com.record.company.com.domain.entity.Album;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class MusicGenderAlbumDto {
 
-    private Integer id;
-    private String name;
-
+    private List<Album> album;
 }

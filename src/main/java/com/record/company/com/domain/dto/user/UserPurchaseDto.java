@@ -12,9 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class UserPurchaseDto {
 
-    private Integer id;
-    private String name;
-
+    private List <Purchase> Purchase;
 }
