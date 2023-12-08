@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "Albums")
+@Table(name = "albums")
 public class Album {
 
     @Id
@@ -21,26 +21,32 @@ public class Album {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "artist_id")
+    @JoinColumn(name = "id_artist")
     private Artist artist;
 
-    @Column(name = "titleAlbum")
+    @Column(name = "album_title")
     private String titleAlbum;
 
-    @Column(name= "numberSongs")
+    @Column(name= "number_songs")
     private int numberSongs;
 
-    @Column(name ="albumImg")
+    @Column(name ="album_img")
     private String AlbumImg;
 
-    @Column(name = "publicationYear")
+    @Column(name = "year_publication")
     private Date publicationYear;
 
     @ManyToOne
-    @JoinColumn(name = "gender_id")
+    @JoinColumn(name = "id_gender")
     private MusicGender musicGender;
 
-    @ManyToMany(mappedBy = "album")
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "album_purchase",joinColumns =
+            @JoinColumn(name = "id_album",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_purchase",
+                    referencedColumnName = "id")
+    )
     private List <Purchase> purchase;
 
 }

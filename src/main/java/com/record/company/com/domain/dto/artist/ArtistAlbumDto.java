@@ -16,6 +16,4 @@ public class ArtistAlbumDto {
 
     private String nameArtist;
 
-    private List<Album> albums;
-
 }

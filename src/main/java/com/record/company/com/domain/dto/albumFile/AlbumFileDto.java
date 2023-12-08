@@ -1,22 +1,21 @@
-package com.record.company.com.domain.dto.musicGenders;
+package com.record.company.com.domain.dto.albumFile;
 
-import com.record.company.com.domain.entity.Album;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MusicGenderDto {
-
+public class AlbumFileDto {
 
     private Integer id;
 
-    private String nameGender;
+    private  String nameImg;
+
+    private String type;
 
 }

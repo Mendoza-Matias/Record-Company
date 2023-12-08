@@ -1,5 +1,7 @@
 package com.record.company.com.domain.dto.purchase;
 
+import com.record.company.com.domain.dto.album.AlbumInfoDto;
+import com.record.company.com.domain.dto.user.UserDto;
 import com.record.company.com.domain.entity.Album;
 import com.record.company.com.domain.entity.User;
 import lombok.AllArgsConstructor;
@@ -19,9 +21,14 @@ public class PurchaseDto {
 
     private Integer id;
 
-    private User user;
+    private UserDto user;
 
     private String purchaseCode;
 
     private LocalDate dateBooking;
+
+    private AlbumInfoDto albumInfo;
+
+
+
 }

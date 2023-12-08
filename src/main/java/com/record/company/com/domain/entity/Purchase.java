@@ -25,15 +25,17 @@ public class Purchase {
     @Column(name = "number_booking")
     private String purchaseCode;
 
-    @Column(name = "date_booking")
+    @Column(name = "date_purchase")
     private LocalDate dateBooking;
 
+
     @ManyToOne
-    @JoinColumn(name = "user_Id")
+    @JoinColumn(name = "id_user")
     private User user;
 
-    @ManyToMany
-    private List <Album> album;
+    @ManyToOne
+    @JoinColumn(name = "id_album")
+    private Album album;
 
 
 }

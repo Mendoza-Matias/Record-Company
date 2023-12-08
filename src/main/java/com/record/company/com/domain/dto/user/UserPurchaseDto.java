@@ -1,5 +1,6 @@
 package com.record.company.com.domain.dto.user;
 
+import com.record.company.com.domain.dto.album.AlbumInfoDto;
 import com.record.company.com.domain.entity.Purchase;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,4 +16,6 @@ import java.util.List;
 public class UserPurchaseDto {
 
     private List <Purchase> Purchase;
+
+    private AlbumInfoDto album;
 }
