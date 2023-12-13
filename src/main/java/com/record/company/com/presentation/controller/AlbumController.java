@@ -3,6 +3,8 @@ package com.record.company.com.presentation.controller;
 import com.record.company.com.bussines.IAlbumServices;
 import com.record.company.com.domain.dto.album.AlbumCreateDto;
 import com.record.company.com.domain.dto.album.AlbumDto;
+import com.record.company.com.domain.dto.album.AlbumInfoDto;
+import com.record.company.com.domain.dto.album.AlbumTitleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,18 +30,29 @@ public class AlbumController {
           return new ResponseEntity<>(albumServices.getAlbumById(id), HttpStatus.OK);
        };
 
-    @PostMapping("{artistId}/{musicGenderId}")
+    @GetMapping("/artist")
+    public ResponseEntity<List<AlbumTitleDto>> getAllAlbumByNameArtist(@RequestParam("name") String artist){
+        return ResponseEntity.ok(albumServices.getAllAlbumByNameArtist(artist));
+    }
+
+    @GetMapping("/genres")
+    public ResponseEntity<List<AlbumInfoDto>> getAllAlbumByMusicGenres (@RequestParam("name") String musicGender) {
+        return ResponseEntity.ok(albumServices.getAllAlbumByMusicGenres(musicGender));
+    }
+
+    @PostMapping("{artistId}/{musicGenderId}/{albumFileId}")
     public ResponseEntity<AlbumDto> createAlbum
-            (@PathVariable("artistId") int artistId ,@PathVariable("musicGenderId") int musicGenderId ,@RequestBody AlbumCreateDto album){
-        return ResponseEntity.created(URI.create("/api/V1/recordCompany/album")).body(albumServices.creteAlbum(artistId,musicGenderId,album));
+            (@PathVariable("artistId") int artistId ,@PathVariable("musicGenderId") int musicGenderId ,@PathVariable("albumFileId") int albumFileId,@RequestBody AlbumCreateDto album){
+        return ResponseEntity.created(URI.create("/api/V1/recordCompany/album")).body(albumServices.creteAlbum(artistId,musicGenderId,albumFileId,album));
     };
 
-    @PutMapping("{id}/{artistId}/{musicGenderId}")
+    @PutMapping("{id}/{artistId}/{musicGenderId}/{albumFileId}")
     public ResponseEntity<AlbumDto> updateAlbum (@PathVariable("id") int id ,
                                                  @PathVariable("artistId") int artistId ,
                                                  @PathVariable("musicGenderId") int musicGenderId ,
+                                                 @PathVariable("albumFileId") int albumFileId,
                                                  @RequestBody AlbumCreateDto album){
-        return ResponseEntity.ok(albumServices.updateAlbum(id,artistId,musicGenderId,album));
+        return ResponseEntity.ok(albumServices.updateAlbum(id,artistId,musicGenderId,albumFileId,album));
     }
 
     @DeleteMapping("{id}")

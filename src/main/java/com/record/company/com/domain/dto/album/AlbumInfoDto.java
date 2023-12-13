@@ -7,15 +7,20 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class AlbumInfoDto {
 
-    private ArtistNameDto artist;
+    private Integer id;
 
     private String titleAlbum;
 
-    private MusicGenderDto musicGender;
+    private int numberSongs;
+
+    private Date publicationYear;
+
 }

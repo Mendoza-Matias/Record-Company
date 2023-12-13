@@ -2,6 +2,7 @@ package com.record.company.com.presentation.controller;
 
 import com.record.company.com.bussines.IArtistServices;
 import com.record.company.com.domain.dto.artist.ArtistDto;
+import com.record.company.com.domain.dto.artist.ArtistNameDto;
 import com.record.company.com.domain.dto.artist.CreateArtistDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,19 @@ public class ArtistController {
         return ResponseEntity.ok(artistServices.getArtistById(id));
     }
 
-    @PostMapping("{albumId}")
-    public ResponseEntity<ArtistDto> createArtist (@PathVariable("albumId") int albumId ,@RequestBody CreateArtistDto artist){
-        return ResponseEntity.created(URI.create("/api/v1/recordCompany/artist")).body(artistServices.createArtist(albumId,artist));
+    @GetMapping("/country")
+    public ResponseEntity<List<ArtistNameDto>> getAllArtistByCountry(@RequestParam("name") String country){
+        return ResponseEntity.ok(artistServices.getAllArtistByCountry(country));
     }
 
-    @PutMapping("{id}/{albumId}")
-    public ResponseEntity<ArtistDto> updateArtist( @PathVariable("id") int id , @PathVariable("albumId") int albumId , @RequestBody CreateArtistDto artist){
-        return ResponseEntity.ok(artistServices.updateArtist(id,albumId,artist));
+    @PostMapping()
+    public ResponseEntity<ArtistDto> createArtist (@RequestBody CreateArtistDto artist){
+        return ResponseEntity.created(URI.create("/api/v1/recordCompany/artist")).body(artistServices.createArtist(artist));
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<ArtistDto> updateArtist( @PathVariable("id") int id , @RequestBody CreateArtistDto artist){
+        return ResponseEntity.ok(artistServices.updateArtist(id,artist));
     }
 
     @DeleteMapping("{id}")

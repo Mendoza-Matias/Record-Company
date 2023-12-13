@@ -30,8 +30,9 @@ public class Album {
     @Column(name= "number_songs")
     private int numberSongs;
 
-    @Column(name ="album_img")
-    private String AlbumImg;
+    @OneToOne
+    @JoinColumn(name = "id_albumFile")
+    private AlbumFile albumFile;
 
     @Column(name = "year_publication")
     private Date publicationYear;

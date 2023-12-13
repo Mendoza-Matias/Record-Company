@@ -33,7 +33,7 @@ public class Purchase {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_album")
     private Album album;
 

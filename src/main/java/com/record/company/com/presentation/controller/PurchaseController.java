@@ -2,6 +2,7 @@ package com.record.company.com.presentation.controller;
 
 import com.record.company.com.bussines.IPurchaseServices;
 import com.record.company.com.domain.dto.purchase.PurchaseDto;
+import com.record.company.com.domain.dto.user.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,10 @@ public class PurchaseController {
     public ResponseEntity<PurchaseDto> getPurchaseById(@PathVariable("id") int id){
         return ResponseEntity.ok(purchaseServices.getPurchaseById(id));
     }
-
+    @GetMapping("/user")
+    public ResponseEntity<UserDto> getUserByPurchaseCode(@RequestParam("code") String purchaseCode){
+        return ResponseEntity.ok(purchaseServices.getUserByPurchaseCode(purchaseCode));
+    }
     @PostMapping("{userId}/{albumId}")
     public ResponseEntity<PurchaseDto> createPurchase (@PathVariable("userId") int userId,@PathVariable("albumId") int albumId){
         return ResponseEntity.created(URI.create("/api/v1/recordCompany/purchase")).body(purchaseServices.createPrePurchase(userId,albumId));

@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UserPurchaseDto {
 
-    private List <Purchase> Purchase;
-
     private AlbumInfoDto album;
+
+    private String purchaseCode;
 }

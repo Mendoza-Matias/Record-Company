@@ -1,6 +1,8 @@
 package com.record.company.com.domain.dto.purchase;
 
+import com.record.company.com.domain.dto.album.AlbumDto;
 import com.record.company.com.domain.dto.album.AlbumInfoDto;
+import com.record.company.com.domain.dto.album.AlbumTitleDto;
 import com.record.company.com.domain.dto.user.UserDto;
 import com.record.company.com.domain.entity.Album;
 import com.record.company.com.domain.entity.User;
@@ -27,8 +29,6 @@ public class PurchaseDto {
 
     private LocalDate dateBooking;
 
-    private AlbumInfoDto albumInfo;
-
-
+    private AlbumTitleDto albumInfo;
 
 }

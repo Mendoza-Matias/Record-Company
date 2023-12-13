@@ -1,11 +1,8 @@
 package com.record.company.com.bussines;
 
-import com.record.company.com.domain.dto.purchase.AlbumPurchaseDto;
-import com.record.company.com.domain.dto.purchase.CreatePurchaseDto;
 import com.record.company.com.domain.dto.purchase.PurchaseDto;
-import com.record.company.com.domain.dto.purchase.UserPurchaseDto;
+import com.record.company.com.domain.dto.user.UserDto;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -22,5 +19,5 @@ public interface IPurchaseServices {
 
     PurchaseDto deletePrePurchase(int id);
 
-
+    UserDto getUserByPurchaseCode(String purchaseCode);
 }

@@ -1,6 +1,5 @@
 package com.record.company.com.domain.dto.albumFile;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,14 +9,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AlbumFileDto {
+public class AlbumFileUrlDto {
 
-    private Integer id;
-
-    private  String nameImg;
-
-    private String path;
-
-    private String type;
+    private String urlImageLocation;
 
 }

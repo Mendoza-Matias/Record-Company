@@ -1,6 +1,6 @@
 package com.record.company.com.persistence.repository;
 
-import com.record.company.com.domain.dto.purchase.UserPurchaseDto;
+import com.record.company.com.domain.dto.user.UserDto;
 import com.record.company.com.domain.entity.Purchase;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,6 +14,6 @@ public interface IPurchaseRepository extends JpaRepository <Purchase,Integer> {
     @Query("SELECT p FROM Purchase p WHERE p.user.id = :userId")
     List <Purchase> getPurchaseByUserId(int userId);
 
-    @Query("SELECT p , u FROM Purchase p JOIN p.user u WHERE p.purchaseCode = :purchaseCode")
-    UserPurchaseDto getUserByPurchaseCode(String purchaseCode);
+    @Query("SELECT p FROM Purchase p WHERE p.purchaseCode = :purchaseCode")
+    Purchase getUserByPurchaseCode(String purchaseCode);
 }

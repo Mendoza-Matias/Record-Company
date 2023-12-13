@@ -25,4 +25,9 @@ public class AlbumFile {
     @Column(name = "file_path")
     private String path;
 
+    @Column(name="location")
+    private String urlImageLocation;
+
+    @OneToOne(mappedBy = "albumFile")
+    private Album album;
 }

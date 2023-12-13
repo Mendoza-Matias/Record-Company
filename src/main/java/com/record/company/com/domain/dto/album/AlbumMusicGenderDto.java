@@ -13,5 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class AlbumMusicGenderDto {
 
+    private Integer id;
+
     private MusicGender musicGender;
 }

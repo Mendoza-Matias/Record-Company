@@ -1,6 +1,5 @@
-package com.record.company.com.domain.dto.purchase;
+package com.record.company.com.domain.dto.album;
 
-import com.record.company.com.domain.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserPurchaseDto {
-    private User user;
+public class AlbumTitleDto {
+
+    private Integer id;
+
+    private String titleAlbum;
 }

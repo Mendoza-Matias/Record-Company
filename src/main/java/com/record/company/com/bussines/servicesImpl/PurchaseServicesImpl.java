@@ -2,9 +2,11 @@ package com.record.company.com.bussines.servicesImpl;
 
 import com.record.company.com.bussines.IPurchaseServices;
 import com.record.company.com.domain.dto.purchase.PurchaseDto;
+import com.record.company.com.domain.dto.user.UserDto;
 import com.record.company.com.domain.entity.Album;
 import com.record.company.com.domain.entity.Purchase;
 import com.record.company.com.domain.entity.User;
+import com.record.company.com.domain.mapper.PurchaseMapper;
 import com.record.company.com.exception.NotFoundException;
 import com.record.company.com.persistence.repository.IAlbumRepository;
 import com.record.company.com.persistence.repository.IPurchaseRepository;
@@ -34,7 +36,7 @@ public class PurchaseServicesImpl implements IPurchaseServices {
 
     @Override
     public List<PurchaseDto> GetAllPrePurchase() {
-        return purchaseRepository.findAll().stream().map((purchase -> modelMapper.map(purchase,PurchaseDto.class))).collect(Collectors.toList());
+        return PurchaseMapper.purchaseMapper(purchaseRepository.findAll());
     }
 
     @Override
@@ -53,9 +55,10 @@ public class PurchaseServicesImpl implements IPurchaseServices {
         purchase.setDateBooking(LocalDate.now());
         purchase.setPurchaseCode(UUID.randomUUID().toString());
         purchase.setAlbum(album);
+    
+        purchaseRepository.save(purchase);
 
-
-        return modelMapper.map(purchaseRepository.save(purchase),PurchaseDto.class);
+        return new PurchaseMapper().purchaseConvertDto(purchase);
     }
 
     @Override
@@ -76,12 +79,18 @@ public class PurchaseServicesImpl implements IPurchaseServices {
     @Override
     public PurchaseDto deletePrePurchase(int id) {
         Optional<Purchase> purchase = purchaseRepository.findById(id);
-        Purchase purchasDelete = purchase.get();
+        Purchase purchasDelete = new Purchase();
 
         if(purchase.isPresent()){
+            purchasDelete = purchase.get();
             purchaseRepository.deleteById(id);
         }
         return modelMapper.map(purchasDelete,PurchaseDto.class);
+    }
+
+    @Override
+    public UserDto getUserByPurchaseCode(String purchaseCode) {
+        return new PurchaseMapper().purchaseUserDto(purchaseRepository.getUserByPurchaseCode(purchaseCode));
     }
 
 }

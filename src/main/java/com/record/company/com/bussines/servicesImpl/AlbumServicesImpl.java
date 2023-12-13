@@ -3,10 +3,14 @@ package com.record.company.com.bussines.servicesImpl;
 import com.record.company.com.bussines.IAlbumServices;
 import com.record.company.com.domain.dto.album.AlbumCreateDto;
 import com.record.company.com.domain.dto.album.AlbumDto;
+import com.record.company.com.domain.dto.album.AlbumInfoDto;
+import com.record.company.com.domain.dto.album.AlbumTitleDto;
 import com.record.company.com.domain.entity.Album;
+import com.record.company.com.domain.entity.AlbumFile;
 import com.record.company.com.domain.entity.Artist;
 import com.record.company.com.domain.entity.MusicGender;
 import com.record.company.com.exception.NotFoundException;
+import com.record.company.com.persistence.repository.IAlbumFileRepository;
 import com.record.company.com.persistence.repository.IAlbumRepository;
 import com.record.company.com.persistence.repository.IArtistRepository;
 import com.record.company.com.persistence.repository.IMusicGendersRepository;
@@ -31,6 +35,9 @@ public class AlbumServicesImpl implements IAlbumServices {
     IMusicGendersRepository musicGendersRepository;
 
     @Autowired
+    IAlbumFileRepository albumFileRepository;
+
+    @Autowired
     ModelMapper modelMapper;
 
     @Override
@@ -43,15 +50,25 @@ public class AlbumServicesImpl implements IAlbumServices {
         return modelMapper.map(albumExist,AlbumDto.class);
     }
     @Override
-    public AlbumDto creteAlbum(int artistId,int musicGenderId ,AlbumCreateDto album) {
+    public List<AlbumTitleDto> getAllAlbumByNameArtist(String artist) {
+        return albumRepository.getAllAlbumByNameArtist(artist).stream().map(album -> modelMapper.map(album,AlbumTitleDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public List<AlbumInfoDto> getAllAlbumByMusicGenres(String musicGender) {
+        return albumRepository.getAllAlbumByMusicGenres(musicGender).stream().map(albumInfoDto -> modelMapper.map(albumInfoDto,AlbumInfoDto.class)).collect(Collectors.toList());
+    }
+    @Override
+    public AlbumDto creteAlbum(int artistId,int musicGenderId,int albumFileId ,AlbumCreateDto album) {
 
         Artist artist = artistRepository.findById(artistId).orElseThrow(()-> new NotFoundException("Id del artista no encontrado"));
         MusicGender gender = musicGendersRepository.findById(musicGenderId).orElseThrow(()-> new NotFoundException("Id del genero musical no encontrado"));
+        AlbumFile albumFile = albumFileRepository.findById(albumFileId).orElseThrow(()-> new NotFoundException("Id de imagen no encontrada"));
 
         Album newAlbum = new Album();
         newAlbum.setTitleAlbum(album.getTitleAlbum());
         newAlbum.setNumberSongs(album.getNumberSongs());
         newAlbum.setPublicationYear(album.getPublicationYear());
+        newAlbum.setAlbumFile(albumFile);
         newAlbum.setArtist(artist);
         newAlbum.setMusicGender(gender);
 
@@ -59,10 +76,11 @@ public class AlbumServicesImpl implements IAlbumServices {
         return modelMapper.map(albumRepository.save(newAlbum),AlbumDto.class);
     }
     @Override
-    public AlbumDto updateAlbum (int id , int artistId , int musicGenderId ,AlbumCreateDto album) {
+    public AlbumDto updateAlbum (int id , int artistId , int musicGenderId , int albumFileId ,AlbumCreateDto album) {
         Optional <Album> albumExist = albumRepository.findById(id);
         Artist artist = artistRepository.findById(artistId).orElseThrow(()-> new NotFoundException("Id del artista no encontrado"));
         MusicGender gender = musicGendersRepository.findById(musicGenderId).orElseThrow(()-> new NotFoundException("Id del genero musical no encontrado"));
+        AlbumFile albumFile = albumFileRepository.findById(albumFileId).orElseThrow(()-> new NotFoundException("Id de imagen no encontrada"));
 
         Album newAlbum = new Album();
 
@@ -71,6 +89,7 @@ public class AlbumServicesImpl implements IAlbumServices {
                 newAlbum.setTitleAlbum(album.getTitleAlbum());
                 newAlbum.setNumberSongs(album.getNumberSongs());
                 newAlbum.setPublicationYear(album.getPublicationYear());
+                newAlbum.setAlbumFile(albumFile);
                 newAlbum.setMusicGender(gender);
                 newAlbum.setArtist(artist);
         }
